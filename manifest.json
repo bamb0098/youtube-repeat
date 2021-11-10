@@ -1,0 +1,19 @@
+{
+  "name": "youtube repeat",
+  "action": {},
+  "manifest_version": 3,
+  "version": "0.1",
+  "description": "Watch what you watched",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
