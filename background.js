@@ -8,7 +8,7 @@ class repeatBody{
 }
 
 
-chrome.tabs.onActivated.addListener( function(activeInfo) {
+chrome.tabs.onUpdated.addListener( function(activeInfo) {
     chrome.tabs.query({active: true, currentWindow: true},function(tabs){   
         var tab = tabs[0];
         chrome.scripting.executeScript({
