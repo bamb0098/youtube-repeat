@@ -15,7 +15,6 @@
     <div class="middle"> <div class="multi-range-slider"> <!-- 진짜 슬라이더 --> <input type="range" id="input-left" /> <input type="range" id="input-right" /> <!-- 커스텀 슬라이더 --> <div class="slider"> <div class="track"></div> <div class="range"></div> <div class="thumb left"></div> <div class="thumb right"></div> </div> </div> </div>
     `;
     let sliderElement = htmlToElement(slider);
-    document.body.append(sliderElement)
     const inputLeft = document.getElementById("input-left");
     const inputRight = document.getElementById("input-right");
     const thumbLeft = document.querySelector(".slider > .thumb.left");
@@ -48,6 +47,9 @@
         let data = res["data"];
         data ||= {};
         let code = location.search.match(/\?v=.+(&|$)/g)[0].replace(/[v?&\=]/g, '');
+        if(code){
+            document.body.append(sliderElement);
+        }
         let cur = data[code] || new repeatInfo();
         
         let infoElement = document.querySelector('ytd-video-primary-info-renderer');

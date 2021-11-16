@@ -8,9 +8,8 @@ class repeatBody{
 }
 
 
-chrome.tabs.onUpdated.addListener( function(activeInfo) {
-    chrome.tabs.query({active: true, currentWindow: true},function(tabs){   
-        var tab = tabs[0];
+chrome.tabs.onCreated.addListener( function(tab) {
+    if(changeInfo.url){
         chrome.scripting.executeScript({
             target: {tabId: tab.id},
             files: ['repeat.js']
@@ -19,5 +18,18 @@ chrome.tabs.onUpdated.addListener( function(activeInfo) {
             target: {tabId: tab.id},
             files: ['style.css']
         });
-    });
+    }
+});
+
+chrome.tabs.onUpdated.addListener( function(tabId, changeInfo) {
+    if(changeInfo.url){
+        chrome.scripting.executeScript({
+            target: {tabId: tabId},
+            files: ['repeat.js']
+        });
+        chrome.scripting.insertCSS({
+            target: {tabId: tabId},
+            files: ['style.css']
+        });
+    }
 });
