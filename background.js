@@ -1,3 +1,5 @@
+let checker = false;
+
 class repeatBody{
     start = 0;
     end = 1;
@@ -7,22 +9,9 @@ class repeatBody{
     }
 }
 
-
-chrome.tabs.onCreated.addListener( function(tab) {
-    if(changeInfo.url){
-        chrome.scripting.executeScript({
-            target: {tabId: tab.id},
-            files: ['repeat.js']
-        });
-        chrome.scripting.insertCSS({
-            target: {tabId: tab.id},
-            files: ['style.css']
-        });
-    }
-});
-
 chrome.tabs.onUpdated.addListener( function(tabId, changeInfo) {
-    if(changeInfo.url){
+    if(changeInfo.url && !checker){
+        checker=true;
         chrome.scripting.executeScript({
             target: {tabId: tabId},
             files: ['repeat.js']
